@@ -2,140 +2,21 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>Relaxing Fidget Room</title>
-    <style>
-        /* プラズマオーブの背景スタイル */
-        .plasma-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            pointer-events: none;
-            background: #0a001a;
-            overflow: hidden;
-        }
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.5;
-        }
-        .orb-1 { width: 400px; height: 400px; background: #ff00ff; top: -100px; left: -100px; animation: float1 12s infinite alternate ease-in-out; }
-        .orb-2 { width: 500px; height: 500px; background: #00ffff; bottom: -150px; right: -50px; animation: float2 15s infinite alternate ease-in-out; }
-        .orb-3 { width: 300px; height: 300px; background: #ffff00; top: 40%; left: 40%; animation: float3 18s infinite alternate ease-in-out; }
-
-        @keyframes float1 { to { transform: translate(150px, 150px) scale(1.1); } }
-        @keyframes float2 { to { transform: translate(-150px, -100px) scale(1.05); } }
-        @keyframes float3 { to { transform: translate(-50px, 100px) scale(1.2); } }
-
-        /* 全体の文字やレイアウト */
-        body {
-            color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
-            padding: 30px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2rem;
-            text-shadow: 0 0 10px #ff00ff;
-        }
-
-        h5 {
-            color: #ccc;
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-            line-height: 1.6;
-        }
-
-        /* 🍮 フィジェット・トイ（ポップイット風おもちゃ）のスタイル */
-        .fidget-container {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 20px;
-            display: inline-grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .toy-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            outline: none;
-            transition: transform 0.1s ease, box-shadow 0.1s ease;
-            box-shadow: inset 0 -5px 10px rgba(0, 0, 0, 0.4), 0 5px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* おもちゃのカラフルな色 */
-        .color-1 { background: #ff477e; }
-        .color-2 { background: #ff7096; }
-        .color-3 { background: #ff85a1; }
-        .color-4 { background: #fbb1bd; }
-
-        /* クリックした時（ぷにっと凹むアニメーション） */
-        .toy-button:active {
-            transform: scale(0.9);
-            box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.6), 0 2px 3px rgba(0, 0, 0, 0.2);
-            filter: brightness(0.8);
-        }
-    </style>
+    <title>hai!❤️(⊙x⊙;)</title>
+    <!-- Y2K CHECKERBOARD BACKGROUND -->
+<style>
+body {
+  background-color: #ffffff;
+  background-image: repeating-conic-gradient(#000000 0% 25%, transparent 0% 50%);
+  background-position: 0 0, 16px 16px;
+  background-size: 32px 32px;
+}
+</style>
+<img src="https://sweetembed.neocities.org/se_spacer.png" alt="" width="1" height="1" style="position:absolute; visibility:hidden;">
 </head>
 <body>
-
-    <!-- 背景 -->
-    <div class="plasma-bg">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
-
     <!-- 自己紹介テキスト -->
     <h1>haaaai! ~(￣▽￣)~*</h1>
-    <h5>こんにちは、ミサキです。マヴィ、キミー、ミミって呼んでね！14歳です。HTMLやPythonを勉強中。バグがあれば、yoyopulgichan@gmail.com まで教えてね！</h5>
-
-    <!-- フィジェットトイのエリア -->
-    <div class="fidget-container">
-        <!-- クリックすると、癒やされる柔らかい低音（サイン波）が鳴るよ -->
-        <button class="toy-button color-1" onclick="playPop(261.63)"></button>
-        <button class="toy-button color-2" onclick="playPop(293.66)"></button>
-        <button class="toy-button color-3" onclick="playPop(329.63)"></button>
-        <button class="toy-button color-4" onclick="playPop(349.23)"></button>
-        <button class="toy-button color-4" onclick="playPop(392.00)"></button>
-        <button class="toy-button color-3" onclick="playPop(440.00)"></button>
-        <button class="toy-button color-2" onclick="playPop(493.88)"></button>
-        <button class="toy-button color-1" onclick="playPop(523.25)"></button>
-    </div>
-
-    <script>
-        // リラックスできる「ぽこっ」という音を作る関数
-        function playPop(frequency) {
-            let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            let osc = audioCtx.createOscillator();
-            let gainNode = audioCtx.createGain();
-
-            // 尖った四角形（square）から、丸みのある滑らかな音（sine）に変えてリラックス効果をアップ！
-            osc.type = 'sine'; 
-            osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
-            
-            // 音が「ぽんっ…」と消えていくように音量をコントロール
-            gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-
-            osc.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.3);
-        }
-    </script>
-
-</body>
+    <h5>こんにちは、ミサキです。マヴィ、キミー、ミミって呼んでね！14歳です。HTMLやPythonを勉強中。バグがあれば、yoyopulgichan@gmail.com まで教えてね！</h5> 
+</body> 
 </html>
